@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140127161625) do
+ActiveRecord::Schema.define(:version => 20140210175637) do
 
   create_table "Heading_Word", :force => true do |t|
     t.integer  "word_id",     :null => false
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(:version => 20140127161625) do
     t.string   "softwareWindowName", :limit => 250, :null => false
     t.integer  "user_id"
   end
+
+  add_index "Log_Software", ["timestamp", "user_id"], :name => "IX_Log_Software"
 
   create_table "Log_Song", :force => true do |t|
     t.integer  "song_id",     :null => false
@@ -117,5 +119,16 @@ ActiveRecord::Schema.define(:version => 20140127161625) do
   end
 
   add_index "Word", ["id"], :name => "IX_Word", :unique => true
+
+  create_table "experiments", :force => true do |t|
+    t.integer  "documents_id"
+    t.integer  "log_software_id"
+    t.string   "query"
+    t.integer  "google_doc_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "experiments", ["log_software_id"], :name => "index_experiments_on_log_software_id"
 
 end
