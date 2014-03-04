@@ -6,6 +6,7 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'activerecord-sqlserver-adapter', '~> 3.2.12'
+gem 'sqlite3', '1.3.5'
 gem 'ruby-odbc'
 
 
@@ -24,7 +25,7 @@ end
 gem 'rspec-rails', '~> 2.6', :group => [:test, :development]
 gem 'jquery-rails'
 gem 'authlogic'
-
+gem 'thin'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
