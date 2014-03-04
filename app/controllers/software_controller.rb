@@ -4,13 +4,12 @@ class SoftwareController < ActionController::Base
   def last
 
 
-    #@user = current_user
-    @user = User.find(6)
-
-
-
-
-    render json: @user.last_software(24.hours.ago)
+    @user = current_user
+    if @user.nil?
+      render json: @user
+    else
+      render json: @user.last_software(24.hours.ago)
+    end
 
 
   end

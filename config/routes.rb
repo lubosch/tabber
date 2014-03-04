@@ -1,6 +1,5 @@
 Tabber::Application.routes.draw do
 
-
   resources :software do
     collection do
       get :last
@@ -9,6 +8,8 @@ Tabber::Application.routes.draw do
 
   resources :user_sessions
 
+  root :to => 'annota#index'
+  get '/log-out' => 'user_sessions#destroy', :as => 'logout'
 
 
   # The priority is based upon order of creation:

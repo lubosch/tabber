@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   self.table_name = 'User'
+  acts_as_authentic
 
   has_many :log_softwares
 
