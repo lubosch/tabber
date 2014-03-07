@@ -8,7 +8,7 @@ class SoftwareController < ActionController::Base
     if @user.nil?
       render json: @user
     else
-      render json: @user.last_software(24.hours.ago)
+      render json: @user.last_software(1.hours.ago)
     end
 
 
