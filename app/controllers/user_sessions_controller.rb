@@ -32,6 +32,13 @@ class UserSessionsController < ApplicationController
 
     @user = User.find_by_annota_id(params[:annota_id]) if params[:annota_id]
     @user = User.find_by_pc_uniq(params[:uniq_pc]) if params[:uniq_pc] && @user.nil?
+    if @user.nil?
+      @user = User.find_by_ip(request.remote_ip)
+      if (params[:annota_id]) && @user
+        @user.annota_id = params[:annota_id]
+        @user.save
+      end
+    end
 
     if @user.nil?
       render json: @user

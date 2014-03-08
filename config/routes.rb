@@ -8,6 +8,12 @@ Tabber::Application.routes.draw do
 
   resources :user_sessions
 
+  namespace :user do
+    #collection do
+      post :update_ip
+    #end
+  end
+
   root :to => 'annota#index'
   get '/log-out' => 'user_sessions#destroy', :as => 'logout'
 

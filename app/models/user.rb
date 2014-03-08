@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :log_softwares
 
 
-  attr_accessible :name, :email, :pass, :token, :annota_id, :pc_uniq
+  attr_accessible :name, :email, :pass, :token, :annota_id, :pc_uniq, :ip
   before_validation :reset_persistence_token, :if => :persistence_token?
 
 
