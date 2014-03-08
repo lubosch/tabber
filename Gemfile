@@ -26,6 +26,9 @@ gem 'rspec-rails', '~> 2.6', :group => [:test, :development]
 gem 'jquery-rails'
 gem 'authlogic'
 gem 'thin'
+gem 'pry'
+gem 'pry-nav'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
