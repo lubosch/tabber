@@ -66,7 +66,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.find
     @user_session.destroy if @user_session
 
-    render "http://annota-test.fiit.stuba.sk/best_pages"
+    redirect_to "http://annota-test.fiit.stuba.sk/best_pages"
     #redirect_to "http://localhost:3000"
 
   end
