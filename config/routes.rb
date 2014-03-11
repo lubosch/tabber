@@ -9,7 +9,11 @@ Tabber::Application.routes.draw do
     end
   end
 
-  resources :software do
+  resources :log_software do
+
+  end
+
+    resources :software do
     collection do
       get :last
     end
