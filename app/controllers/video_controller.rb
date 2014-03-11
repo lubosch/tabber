@@ -1,3 +1,5 @@
+require 'net/http'
+
 class VideoController < ApplicationController
   include ApplicationHelper
 
@@ -8,7 +10,7 @@ class VideoController < ApplicationController
 
       url = URI.parse('https://gdata.youtube.com/feeds/api/videos/' + params[:video_id] + '?v=2&alt=jsonc')
 
-      response = Net::HTTP.start(url.host, use_ssl: true) do |http|
+      response = Net::HTTP.start(url.host, use_ssl: false) do |http|
         http.get url.request_uri, 'User-Agent' => 'MyLib v1.2'
       end
 
