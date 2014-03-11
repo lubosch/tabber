@@ -4,11 +4,7 @@ class Software < ActiveRecord::Base
 
   has_many :log_softwares
 
-
-
   attr_accessible :name, :process, :filepath
-
-
 
 
 end

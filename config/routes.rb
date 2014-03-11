@@ -1,5 +1,8 @@
 Tabber::Application.routes.draw do
 
+  resources :video do
+  end
+
   resources :software do
     collection do
       get :last
