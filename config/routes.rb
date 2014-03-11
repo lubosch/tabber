@@ -1,6 +1,12 @@
 Tabber::Application.routes.draw do
 
+  resources :song do
+  end
+
   resources :video do
+    collection do
+      post :parse_youtube
+    end
   end
 
   resources :software do
@@ -13,7 +19,7 @@ Tabber::Application.routes.draw do
 
   namespace :user do
     #collection do
-      post :update_ip
+    post :update_ip
     #end
   end
 

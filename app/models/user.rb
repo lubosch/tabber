@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
 
   def last_software(time)
-    LogSoftware.joins(:software).joins("JOIN (#{last_softwares_id(24.hours.ago).to_sql}) lss ON lss.stopa=timestamp").select("[Log_Software].id, name, pocet,softwareWindowName").order(:pocet).reverse_order
+    LogSoftware.joins(:software).joins("JOIN (#{last_softwares_id(time).to_sql}) lss ON lss.stopa=timestamp").select("[Log_Software].id, name, pocet,softwareWindowName").order(:pocet).reverse_order
   end
 
 
