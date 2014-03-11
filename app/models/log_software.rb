@@ -11,5 +11,8 @@ class LogSoftware < ActiveRecord::Base
   scope :timestamp_within, lambda { |time_ago| {:conditions => ['[Log_software].timestamp   > ?', time_ago]} }
 
 
+  def last(user)
+    LogSoftware.where(:user_id => user).order('timestamp DESC').first
+  end
 
 end
