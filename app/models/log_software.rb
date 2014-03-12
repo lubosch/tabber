@@ -5,7 +5,7 @@ class LogSoftware < ActiveRecord::Base
   belongs_to :user
 
 
-  attr_accessible :softwareWindowName, :timestamp
+  attr_accessible :softwareWindowName, :timestamp, :user, :software
 
 
   scope :timestamp_within, lambda { |time_ago| {:conditions => ['[Log_software].timestamp   > ?', time_ago]} }

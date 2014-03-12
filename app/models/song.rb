@@ -7,9 +7,10 @@ class Song < ActiveRecord::Base
 
 
   def log(software, user)
-    last_ls = LogSong.where(:software_id => software, :song_id => self, :user_id => user).order('started DESC').first
-    if !last_ls || (last_ls.started.to_i - DateTime.current.to_i)/60 > length
-      LogSong.create(:software => software, :user => user, :song => self, :started => DateTime.current)
+    length = 600 if !length || length == 0 
+    last_ls = LogSong.where(:software_id => software, :song_id => self, :user_id => user).where("started > ?", length.seconds.ago).first
+    if !last_ls
+      LogSong.create(:software => software, :user => user, :song => self, :started => DateTime.now)
     end
 
   end
