@@ -8,10 +8,11 @@ class LogSoftwareController < ActionController::Base
       s = Software.find_or_create_by_process(:process => params[:process_name], :filepath => params[:filepath], :name => params[:description])
       ls = LogSoftware.last
       ls = LogSoftware.create(:softwareWindowName => params[:window_name], :timestamp => DateTime.current, :user => @user, :software => s) if ls.softwareWindowName != params[:window_name]
-
+      render json: ls
+    else
+      render status: 401
     end
 
-    render json: ls
   end
 
 end
