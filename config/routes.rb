@@ -1,7 +1,19 @@
 Tabber::Application.routes.draw do
 
+  resources :song do
+  end
 
-  resources :software do
+  resources :video do
+    collection do
+      post :parse_youtube
+    end
+  end
+
+  resources :log_software do
+
+  end
+
+    resources :software do
     collection do
       get :last
     end
@@ -9,6 +21,14 @@ Tabber::Application.routes.draw do
 
   resources :user_sessions
 
+  namespace :user do
+    #collection do
+    post :update_ip
+    #end
+  end
+
+  root :to => 'annota#index'
+  get '/log-out' => 'user_sessions#destroy', :as => 'logout'
 
 
   # The priority is based upon order of creation:

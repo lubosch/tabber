@@ -30,8 +30,16 @@ class UserSessionsController < ApplicationController
   # POST /sessions.json
   def create
 
+    @user = User.find_by_annota_id(params[:annotaT_id]) if params[:annotaT_id]
     @user = User.find_by_annota_id(params[:annota_id]) if params[:annota_id]
-    @user = User.find_by_pc_uniq(params[:uniq_pc]) if params[:uniq_pc] && @user.nil?
+    @user = User.find_by_pc_uniq(params[:uniq_pc]) if params[:uniq_pc] && !@user
+    if !@user 
+      @user = User.find_by_ip(request.remote_ip)
+      if (params[:annotaT_id]) && @user
+        @user.annota_id = params[:annotaT_id]
+        @user.save
+      end
+    end
 
     if @user.nil?
       render json: @user
@@ -59,13 +67,9 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.find
     @user_session.destroy if @user_session
 
-    respond_to do |format|
-      format.html do
-        gflash success: {value: 'Successfully logged out.', time: 5000}
-        redirect_to root_path
-      end
-      format.json { head :no_content }
-    end
+    redirect_to "http://annota-test.fiit.stuba.sk/best_pages"
+    #redirect_to "http://localhost:3000"
+
   end
 
   def actionToSkipLogging

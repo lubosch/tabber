@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140210175637) do
+ActiveRecord::Schema.define(:version => 20140308013942) do
 
   create_table "Heading_Word", :force => true do |t|
     t.integer  "word_id",     :null => false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20140210175637) do
     t.integer "annota_id"
     t.string  "pc_uniq",           :limit => 250, :null => false
     t.string  "persistence_token"
+    t.string  "ip"
   end
 
   create_table "Word", :force => true do |t|
@@ -119,16 +120,5 @@ ActiveRecord::Schema.define(:version => 20140210175637) do
   end
 
   add_index "Word", ["id"], :name => "IX_Word", :unique => true
-
-  create_table "experiments", :force => true do |t|
-    t.integer  "documents_id"
-    t.integer  "log_software_id"
-    t.string   "query"
-    t.integer  "google_doc_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "experiments", ["log_software_id"], :name => "index_experiments_on_log_software_id"
 
 end
