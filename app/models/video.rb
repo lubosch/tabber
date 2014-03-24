@@ -6,10 +6,10 @@ class Video < ActiveRecord::Base
   attr_accessible :filename, :name, :timestamp, :times, :length, :software
 
   def log(software, user)
-    last_lm = LogMovie.where(:software_id => software, :video_id => self, :user_id => user).order('started DESC').first
-    length = 2.hours if length == 0
-    if !last_lm || (last_lm.started.to_i - DateTime.current.to_i)/60 > length
-      LogMovie.create(:software => software, :user => user, :movie => self, :started => DateTime.current)
+    length = 7200 if !length || length == 0    
+    last_lm = LogMovie.where('',:software_id => software, :movie_id => self, :user_id => user).where("started > ?", length.seconds.ago).first
+    if !last_lm
+      LogMovie.create(:software => software, :user => user, :movie => self, :started => DateTime.now)
     end
 
   end

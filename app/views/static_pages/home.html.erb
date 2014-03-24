@@ -1,0 +1,37 @@
+<!--<div id="banner" class="container"><a href="#" class="image"><img src="<%= asset_path('sh2.jpg') %>" alt=""/></a></div>-->
+<div id="portfolio-wrapper">
+  <div id="portfolio" class="container">
+    <div id="column1">
+      <div class="title">
+        <h2>About</h2>
+      </div>
+      <p>Tabber is activity log tool that finds out what you are actually doing and gives you more precise search
+        results at Google based on your current activity</p>
+      <%= read_more_link_to about_me_path %>
+    </div>
+    <div id="column2">
+      <div class="title">
+        <h2>Activity you log</h2>
+      </div>
+      <p>To find out, what you are trying to search, we need to know your actual context and previous activities.
+        Therefore we log your applications current names, how you switch between applicatons and few others things </p>
+      <%= read_more_link_to activity_logging_path %>
+    </div>
+    <div id="column3">
+      <div class="title">
+        <h2>How we help</h2>
+      </div>
+      <p>The search query mostly consists of 2-3 words, so it may have many meanings. We extend your query by few words
+        that give your query specific meaning and more precise results. We also provide few useful features</p>
+      <%= read_more_link_to we_help_path %>
+    </div>
+    <div id="column4">
+      <div class="title">
+        <h2>Security</h2>
+      </div>
+      <p>Your privacy is our top priority. We don't keep any personal information or any passwords. Your activity is
+        bound to your computer mother-board number and we have no chance to find out, who hides behind that number</p>
+      <%= read_more_link_to security_path %>
+    </div>
+  </div>
+</div>

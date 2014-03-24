@@ -1,0 +1,32 @@
+<div id="page" class="container">
+    <div id="content2">
+        <div class="title centered">
+            <h1>Thanks to you all</h1>
+
+            <h2><%= @counts['different'] %> </h2>
+
+            <h1>good people, we already have </h1>
+
+            <h2><%= @counts['count'] %> </h2>
+
+            <h1>connected queries to proper application</h1>
+        </div>
+        <div class="title centered">
+            <h1>Today you all have already connected</h1>
+
+            <h2><%= @counts['today_count'] %> </h2>
+            <% if @counts['mine']%>
+            <h1>queries and you </h1>
+            <% else%>
+            <h1>queries </h1>
+            <%end%>
+        </div>
+        <div class="title centered">
+            <h2>
+            THANK YOU
+
+            </h2>
+        </div>
+
+    </div>
+</div>

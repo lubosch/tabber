@@ -8,9 +8,12 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :pass, :token, :annota_id, :pc_uniq, :ip
   before_validation :reset_persistence_token, :if => :persistence_token?
 
+  def last_log
+    log_softwares.order('timestamp DESC').first
+  end
 
   def last_log_software(time)
-    log_softwares.timestamp_within(time).joins('JOIN Log_Software ls ON ls.id = (SELECT TOP 1 id FROM Log_software ls WHERE [Log_software].timestamp < ls.timestamp AND [Log_software].user_id = ls.user_id ORDER BY timestamp)').where("DATEDIFF(second, [Log_software].timestamp, ls.timestamp) > 5")
+    log_softwares.timestamp_within(time).joins('JOIN Log_Software ls ON ls.id = (SELECT TOP 1 id FROM Log_software ls WHERE [Log_software].timestamp < ls.timestamp AND [Log_software].user_id = ls.user_id ORDER BY timestamp)').where("DATEDIFF(second, [Log_software].timestamp, ls.timestamp) > 5 AND [log_software].software_id NOT IN (?)", Software.where(:ignore => 1))
 
   end
 
@@ -27,6 +30,13 @@ class User < ActiveRecord::Base
     LogSoftware.joins(:software).joins("JOIN (#{last_softwares_id(time).to_sql}) lss ON lss.stopa=timestamp").select("[Log_Software].id, name, pocet,softwareWindowName").order(:pocet).reverse_order
   end
 
+  def update_ip(his_ip)
+    if (!self.ip)
+      self.ip = his_ip
+      self.email = rand(21353554).to_s + "@unknown.com" if !self.email
+      save!
+    end
+  end
 
   def persistence_token?
     if persistence_token.nil?

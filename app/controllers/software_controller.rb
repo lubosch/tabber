@@ -13,7 +13,7 @@ class SoftwareController < ActionController::Base
   end
 
   def create
-    @sofware = Software.find_or_create_by_filepath(params[:filepath], params[:name], params[:process])
+    @sofware = Software.find_or_create_by_filepath(:filepath  => params[:filepath], :name => params[:name], :process => params[:process], :ignore => 0)
     render json: @sofware
   end
 

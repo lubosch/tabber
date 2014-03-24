@@ -14,5 +14,9 @@ module ApplicationHelper
     @current_user = current_user
   end
 
+  def read_more_link_to path
+    link_to 'Read more', path, class: "icon icon-arrow-right button"
+
+  end
 
 end

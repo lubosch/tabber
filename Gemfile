@@ -28,6 +28,7 @@ gem 'authlogic'
 gem 'thin'
 gem 'pry'
 gem 'pry-nav'
+gem 'httparty'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

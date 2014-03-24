@@ -1,0 +1,86 @@
+<div id="page" class="container">
+  <div id="content">
+    <div class="title">
+      <h2>The activity you are logging</h2>
+      <span class="byline">We can help you only when we know you</span></div>
+    <p>To specify your search query, we need to know what you are actually doing. Don't worry, <b>we</b> is not Big
+      Brother, it is <b>sophistic algorithm</b>. It process your current activity into keywords defining your current
+      context. It captures meaningless names and translate them into keywords, each having proper weight describing how
+      meaningful is it for you at the very moment.</p>
+    <ul class="style3">
+      <li id="Tabber" class="first">
+        <h3><em><%= image_tag(asset_path('Ikona.ico'), width: 100, height: 100, class: "alignleft border") %> </em>Tabber
+        </h3>
+
+        <p>Tabber is desktop activity logger tool that captures user activity between applications and basic info about
+          applications. It starts automatic when computer starts and can be whenever paused by right click at icon in
+          notification area. It captures:</p>
+
+        <ul class="style2">
+          <li>Process name and ID</li>
+          <li>Application window's actual name</li>
+          <li>Application you switch to and time at that moment</li>
+          <li>Name and path of songs you play and time when you play it</li>
+          <li>Name and path of videos you play and time when you play it</li>
+        </ul>
+        <p>As you can see, this data should not be sensitive, but they are essential to connect your current query to
+          the correct application and provide basic context of each application. We also need to store names of media
+          you play, because then we are able to specify your query to find subtitles, youtube video or actors faster. In
+          the distant future we also plan to recommend music and movies.</p>
+
+        <!--<ul>-->
+        <!--<li>numero 1</li>-->
+        <!--</ul>-->
+
+      </li>
+      <li id="Annota">
+        <h3><em><%= image_tag(asset_path('annota.png'), width: 100, height: 100, class: "alignleft border") %> </em>Annota
+        </h3>
+
+        <p>Annota is firefox extension that captures your activity inside Firefox browser. It is powered by
+          <a href="http://annota-test.fiit.stuba.sk/best_pages/">Annota server</a>. It is active as long as you are
+          logged into Annota, so it is not active when you are using private browsing or you sign out. It captures these
+          activities and data: </p>
+        <ul class="style2">
+          <li>Url</li>
+          <li>Title of web-pages</li>
+          <li>Times of change of web-page</li>
+          <li>Text that you copy</li>
+          <li>Text that you select</li>
+          <li>ID of youtube videos</li>
+          <li>Links you click on</li>
+        </ul>
+      </li>
+      <li id="Wordik">
+        <h3><em><%= image_tag(asset_path('wordik.png'), width: 80, height: 100, class: "alignleft border") %> </em>Wordik
+        </h3>
+
+        <p>Wordik is a Microsoft Office Word add-in, that captures your context in a Word's document. It captures the
+          content of an essay or whatever you are actually writing and extracts keywords descibing the document. It can
+          be whenever disabled by unchecking checkbox "Chcem sa logovat" It
+          captures following parts of currently writing document:</p>
+        <ul class="style2">
+          <li>Name of document</li>
+          <li>Previous, currently writing and following paragraph</li>
+          <li>Current header and parent headers</li>
+        </ul>
+        <p>It does not save your whole document, only keywords describing interesting parts.</p>
+
+      </li>
+    </ul>
+  </div>
+  <div id="sidebar">
+
+    <div class="box2">
+      <div class="title">
+        <h2>Content</h2>
+      </div>
+      <ul class="style2">
+        <li><a href="#">Menu</a></li>
+        <li><a href="#Tabber">Desktop logger Tabber</a></li>
+        <li><a href="#Annota">Firefox logger Annota</a></li>
+        <li><a href="#Wordik">Microsoft Word logger Wordik</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

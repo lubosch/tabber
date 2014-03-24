@@ -27,7 +27,18 @@ Tabber::Application.routes.draw do
     #end
   end
 
-  root :to => 'annota#index'
+  root to: 'static_pages#home'
+  get '/about-me' => 'static_pages#about_me', :as => 'about_me'
+  get '/activity-logging' => 'static_pages#activity_logging', :as => 'activity_logging'
+  get '/we-help' => 'static_pages#we_help', :as => 'we_help'
+  get '/actual-state' => 'static_pages#actual_state', :as => 'actual_state'
+  get '/security' => 'static_pages#security', :as => 'security'
+  get '/installation' => 'static_pages#installation', :as => 'installation'
+  get '/installation-detailed' => 'static_pages#installation_detailed', :as => 'installation_detailed'
+  get '/to-fix' => 'static_pages#to_fix', :as => 'to_fix'
+  get '/feedback' => 'static_pages#feedback', :as => 'feedback'
+
+
   get '/log-out' => 'user_sessions#destroy', :as => 'logout'
 
 
@@ -79,7 +90,7 @@ Tabber::Application.routes.draw do
   #   end
 
   # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
+  # just remember to delete public/home.html.erb.
   # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
