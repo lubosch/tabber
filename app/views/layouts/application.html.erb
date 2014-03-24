@@ -13,14 +13,12 @@
     <div id="menu" class="container">
       <ul>
         <li class="<%= "current_page_item" if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
-        <li class="<%= "current_page_item" if current_page?(about_me_path) %>"><%= link_to "About me", about_me_path %></li>
+        <li class="<%= "current_page_item" if current_page?(about_me_path) %>"><%= link_to "About project", about_me_path %></li>
         <li class="<%= "current_page_item" if current_page?(activity_logging_path) %>"><%= link_to "What you log", activity_logging_path %></li>
         <li class="<%= "current_page_item" if current_page?(we_help_path) %>"><%= link_to "How we help", we_help_path %></li>
         <li class="<%= "current_page_item" if current_page?(actual_state_path) %>"><%= link_to "Actual state", actual_state_path %></li>
-        <li class="<%= "current_page_item" if current_page?(security_path) %>"><%= link_to "Privacy", security_path %></li>
         <li class="<%= "current_page_item" if current_page?(installation_path) %>"><%= link_to "Install", installation_path %></li>
-        <li class="<%= "current_page_item" if current_page?(to_fix_path) %>"><%= link_to "How to fix", to_fix_path %></li>
-        <li class="<%= "current_page_item" if current_page?(feedback_path) %>"><%= link_to "Feedback", feedback_path %></li>
+        <li class="<%= "current_page_item" if current_page?(security_path) %>"><%= link_to "Privacy", security_path %></li>
       </ul>
     </div>
     <!-- end #menu -->
