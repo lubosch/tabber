@@ -9,7 +9,7 @@
 
     <h3> Install tools</h3>
     <ul class="style2">
-      <li class="first"> If you want detailed installation guide with screenshots, click <%= link_to "here" , installation_detailed_path %> </li>
+      <li class="first"> If you want detailed installation guide with screenshots, click <strong><%= link_to "here" , installation_detailed_path %></strong> </li>
       <li class="first"> Extract all files somewhere</li>
       <li> Run <strong>Instaluj.bat</strong></li>
       <li> Register in case you do not have Annota account</li>
@@ -25,7 +25,7 @@
     <h3> Anything failed?</h3>
     <ul class="style2">
       <li class="first"> If installation of word addin failed and shows error message
-        <strong>.NET 4.0 is not intalled for Visual Studio</strong>, download and install <a href="#">this</a> and run
+        <strong>.NET 4.0 is not intalled for Visual Studio</strong>, download and install <a href="http://vnenk.orava.sk/vstor_redist.exe">this</a> and run
         again installation with <strong> Mam ucet </strong> choice
       </li>
       <li>If Annota is not installed, install it manually, please. Just drag and drop <strong>AnnotaT.xpi</strong> to
@@ -47,6 +47,7 @@
       <li> List of websites should appear</li>
       <li> Search something different again</li>
       <li> List of desktop applications should appear</li>
+      <em><%= image_tag(asset_path('6th.png'), width: 900, height: 300, class: "alignleft border") %> </em>
       <li> After reboot, Tabber should aain appear in notification area. If not, contact me</li>
     </ul>
 
