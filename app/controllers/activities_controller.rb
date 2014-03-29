@@ -1,9 +1,9 @@
 class ActivitiesController < ApplicationController
   def show
 
-    #user = User.find(6)
+    user = User.find(6)
 
-    user = current_user
+    #user = current_user
     if user
 
       if (params[:range])
