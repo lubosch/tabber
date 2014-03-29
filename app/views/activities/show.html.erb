@@ -1,0 +1,55 @@
+<%= javascript_tag do %>
+
+    window.log_data =   <%= raw @logs[:logs].to_json %>;
+    window.labels =   <%= raw @logs[:labels].to_json %>;
+    window.start_date =   <%= @logs[:start_date].to_i %>;
+    window.start_hour =   <%= @logs[:start_date].hour %>;
+    window.x_size =   <%= @logs[:x_size] %>;
+    window.step =   <%= 1 %>;
+
+<% end %>
+
+
+
+<div id="page" class="container">
+  <div id="content2">
+    <div class="title">
+      <h2>The activity you are logging</h2>
+      <span class="byline">We can help you only when we know you</span></div>
+  </div>
+
+  <div id="page" class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="range_container">
+      <%= form_tag(activity_show_path, :remote => true, :method => "get") do |f| %>
+
+          From <input id="timepicker"/> <b id="time_ago"></b>
+          <%= button_tag "Change", class: "icon icon-ok", :id => "change_tabber_range" %>
+      <% end %>
+    </div>
+
+
+    <div class="graph-container">
+      <div class="graph-container-inner" style="width:<%= @logs[:real_size] %>px;">
+
+        <div id="scheduler_here" class="dhx_cal_container" style="width:100%; height:100%;">
+          <div class="dhx_cal_navline">
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_today_button"></div>
+            <div class="dhx_cal_date"></div>
+          </div>
+          <div class="dhx_cal_header">
+          </div>
+          <div class="dhx_cal_data">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="icon icon-zoom-in"></button>
+    <button class="icon icon-zoom-out"></button>
+  </div>
+
+
+</div>
+
+

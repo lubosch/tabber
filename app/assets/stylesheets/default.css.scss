@@ -1,3 +1,4 @@
+
 html, body {
   height: 100%;
 }
@@ -95,7 +96,7 @@ ul.style1 li:first-child {
 }
 
 ul.style2 {
-padding-bottom: 10px;
+  padding-bottom: 10px;
   list-style-type: circle;
 
 }
@@ -251,8 +252,41 @@ ul.contact li a.icon-rss:before {
   margin: 0px auto;
 }
 
+.graph-container {
+  width: 1200px;
+  height: 500px;
+  margin: 20px auto !important;
+
+  overflow: auto;
+  //  margin: 0px auto;
+}
+
+.graph-container-inner {
+  width: 9000px;
+  height: 100%;
+  //  margin: 0px auto;
+}
+
+.yellow_section {
+  background-color: #ffa749;
+  opacity: 0.25;
+}
+
 .clearfix {
   clear: both;
+}
+
+.highlighted_timespan {
+  transition: background-color 400ms;
+  -moz-transition: background-color 400ms;
+  -webkit-transition: background-color 400ms;
+  -o-transition: background-color 400ms;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+
+.highlighted_timespan:hover {
+  background-color: #90ee90;
 }
 
 /*********************************************************************************/
@@ -384,9 +418,10 @@ ul.contact li a.icon-rss:before {
 }
 
 #content2 {
-  margin: auto ;
+  margin: auto;
   width: 790px;
 }
+
 /*********************************************************************************/
 /* Sidebar                                                                       */
 /*********************************************************************************/
@@ -394,7 +429,7 @@ ul.contact li a.icon-rss:before {
 #sidebar {
   float: left;
   width: 345px;
-  position:fixed;
+  position: fixed;
 }
 
 #sidebar .title h2 {

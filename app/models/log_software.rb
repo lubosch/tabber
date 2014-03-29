@@ -15,4 +15,7 @@ class LogSoftware < ActiveRecord::Base
     LogSoftware.where(:user_id => user).order('timestamp DESC').first
   end
 
+
+
+
 end

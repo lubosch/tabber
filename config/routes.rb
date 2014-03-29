@@ -21,6 +21,7 @@ Tabber::Application.routes.draw do
 
   resources :user_sessions
 
+
   namespace :user do
     #collection do
     post :update_ip
@@ -29,7 +30,9 @@ Tabber::Application.routes.draw do
 
   root to: 'static_pages#home'
   get '/about-me' => 'static_pages#about_me', :as => 'about_me'
-  get '/activity-logging' => 'static_pages#activity_logging', :as => 'activity_logging'
+  get '/my-activity' => 'activities#show', :as => 'activity_show'
+
+  get '/activities-logging' => 'static_pages#activity_logging', :as => 'activity_logging'
   get '/we-help' => 'static_pages#we_help', :as => 'we_help'
   get '/actual-state' => 'static_pages#actual_state', :as => 'actual_state'
   get '/security' => 'static_pages#security', :as => 'security'
