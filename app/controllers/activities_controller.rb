@@ -1,7 +1,7 @@
 class ActivitiesController < ApplicationController
   def show
 
-    user = User.find(6)
+    user = current_user
     if (params[:range])
       date = Time.parse(params[:range])
       @logs = user.last_log_software_tabber(date)

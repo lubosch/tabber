@@ -1,5 +1,5 @@
 $(function () {
-    start_date = new Date(Number(start_date) * 1000)
+//    start_date = new Date(Number(start_date) * 1000)
 
     draw_graph();
 
