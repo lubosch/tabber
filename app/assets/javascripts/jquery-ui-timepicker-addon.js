@@ -46,7 +46,7 @@
             isRTL: false
         };
         this._defaults = { // Global defaults for all the datetime picker instances
-            showButtonPanel: false,
+            showButtonPanel: true,
             timeOnly: false,
             showHour: null,
             showMinute: null,

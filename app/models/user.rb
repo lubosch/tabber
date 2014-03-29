@@ -31,7 +31,6 @@ class User < ActiveRecord::Base
       l["end_date"] = l["end_date"].strftime("%Y-%m-%d %H:%M.%S")
     end
 
-
     result = {:logs => grouped_logs, :labels => ids, :start_date => start_date, :end_date => end_date, :x_size => x_size, :real_size => real_size}
 
     result
