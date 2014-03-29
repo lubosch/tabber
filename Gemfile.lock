@@ -141,6 +141,7 @@ GEM
     thor (0.19.0)
     tilt (1.4.1)
     tiny_tds (0.6.1)
+    tiny_tds (0.6.1-x86-mingw32)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -152,6 +153,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
   x86-mingw32
 
 DEPENDENCIES
