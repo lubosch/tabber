@@ -5,6 +5,7 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter', '~> 3.2.12'
 gem 'sqlite3', '1.3.5'
 gem 'ruby-odbc'
@@ -24,6 +25,7 @@ end
 
 gem 'rspec-rails', '~> 2.6', :group => [:test, :development]
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'authlogic'
 gem 'thin'
 gem 'pry'

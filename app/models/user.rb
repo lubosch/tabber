@@ -14,7 +14,54 @@ class User < ActiveRecord::Base
 
   def last_log_software(time)
     log_softwares.timestamp_within(time).joins('JOIN Log_Software ls ON ls.id = (SELECT TOP 1 id FROM Log_software ls WHERE [Log_software].timestamp < ls.timestamp AND [Log_software].user_id = ls.user_id ORDER BY timestamp)').where("DATEDIFF(second, [Log_software].timestamp, ls.timestamp) > 5 AND [log_software].software_id NOT IN (?)", Software.where(:ignore => 1))
+  end
 
+  def last_log_software_tabber(time)
+    logs = log_softwares.timestamp_within(time).joins('JOIN Log_Software ls ON ls.id = (SELECT TOP 1 id FROM Log_software ls WHERE [Log_software].timestamp < ls.timestamp AND [Log_software].user_id = ls.user_id ORDER BY timestamp)').where("DATEDIFF(second, [Log_software].timestamp, ls.timestamp) > 5").select("[Log_Software].software_id section_id, [Log_Software].softwareWindowName text, [Log_Software].timestamp start_date, ls.timestamp end_date")
+    grouped_logs = process_logs(logs)
+    ids = grouped_logs.map { |l| l["section_id"] }.uniq
+    ids = Software.where(:id => ids).select("[id] [key], name label").as_json
+    start_date =grouped_logs.first["start_date"]
+    end_date =grouped_logs.last["end_date"]
+    x_size = calc_x_size start_date, end_date
+    real_size = calc_real_size start_date, end_date
+
+    grouped_logs.each do |l|
+      l["start_date"] = l["start_date"].strftime("%Y-%m-%d %H:%M.%S")
+      l["end_date"] = l["end_date"].strftime("%Y-%m-%d %H:%M.%S")
+    end
+
+
+    result = {:logs => grouped_logs, :labels => ids, :start_date => start_date, :end_date => end_date, :x_size => x_size, :real_size => real_size}
+
+    result
+  end
+
+  def calc_x_size(start_date, end_date)
+    ((end_date-start_date)/60 -50 ).ceil
+  end
+
+
+  def calc_real_size(start_date, end_date)
+    ((end_date-start_date)/60*19).ceil
+  end
+
+
+  def process_logs(logs)
+    grouped_logs = logs.as_json.sort_by { |log| log[:start_date] }
+
+    i=1
+    while i<grouped_logs.count do
+      if grouped_logs[i]["section_id"] == grouped_logs[i-1]["section_id"]
+        grouped_logs.delete(grouped_logs[i])
+      else
+        grouped_logs[i-1]["end_date"] = grouped_logs[i]["start_date"]
+
+        i+=1
+      end
+    end
+
+    grouped_logs
   end
 
   def last_softwares_id(time)

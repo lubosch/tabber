@@ -1,0 +1,13 @@
+log_data =  <%= raw @logs[:logs].to_json %>;
+labels =   <%= raw @logs[:labels].to_json %>;
+start_date =   <%= @logs[:start_date].to_i %>;
+start_hour =   <%= @logs[:start_date].hour %>;
+x_size =   <%= @logs[:x_size] %>;
+step =   <%= 1 %>;
+<% #binding.pry %>
+start_date = new Date(Number(start_date) * 1000)
+$('.graph-container-inner').first().width(<%= @logs[:real_size] %>)
+
+scheduler.clearAll();
+draw_graph();
+console.log('das')
