@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
     else
 
       respond_to do |format|
-        format.html {redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activites'}
+        format.html {redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activities'}
 
         format.json do
           if user.nil?
@@ -32,7 +32,7 @@ class ActivitiesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activites'}
+      format.html {redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activities'}
       format.json {render json: @logs}
     end
 
