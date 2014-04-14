@@ -41,6 +41,8 @@ Tabber::Application.routes.draw do
   get '/installation-detailed' => 'static_pages#installation_detailed', :as => 'installation_detailed'
   get '/to-fix' => 'static_pages#to_fix', :as => 'to_fix'
   get '/feedback' => 'static_pages#feedback', :as => 'feedback'
+  post '/pasted' => 'clipboard#pasted', :as => 'pasted'
+  post '/copied' => 'clipboard#copied', :as => 'copied'
 
 
   get '/log-out' => 'user_sessions#destroy', :as => 'logout'
