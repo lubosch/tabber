@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
     else
 
       respond_to do |format|
-        format.html {redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activities'}
+        format.html { redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activities' }
 
         format.json do
           if user.nil?
@@ -32,9 +32,23 @@ class ActivitiesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html {redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activities'}
-      format.json {render json: @logs}
+      format.html { redirect_to 'http://annota-test.fiit.stuba.sk/best_pages/activities' }
+      format.json { render json: @logs }
     end
 
   end
+
+  def context
+    user = User.find_by_annota_id(params[:annota_id]) if params[:annota_id]
+
+    if user && params[:hours_ago] && params[:end_date]
+      context = user.context(params[:hours_ago].to_i, Time.parse(params[:end_date]))
+      render json: context
+      return
+    end
+    render :status => 404
+
+  end
+
+
 end

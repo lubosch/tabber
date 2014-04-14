@@ -1,0 +1,2 @@
+class ClipboardPaste < Clipboard
+end
