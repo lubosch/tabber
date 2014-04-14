@@ -3,6 +3,12 @@ class User < ActiveRecord::Base
   acts_as_authentic
 
   has_many :log_softwares
+  has_many :log_songs
+  has_many :songs, :through => :log_songs
+  has_many :log_movies
+  has_many :words
+  has_many :word_texts, :through => :words
+  has_many :word_headings, :through => :words
 
 
   attr_accessible :name, :email, :pass, :token, :annota_id, :pc_uniq, :ip
@@ -26,15 +32,68 @@ class User < ActiveRecord::Base
     x_size = calc_x_size start_date, end_date
     real_size = calc_real_size start_date, end_date
 
-
-
     result = {:logs => grouped_logs, :labels => ids, :start_date => start_date, :end_date => end_date, :x_size => x_size, :real_size => real_size}
 
     result
   end
 
+  def context(hours_ago, end_date)
+    context = {}
+    context[:activities] = context_logs(hours_ago, end_date)
+    context[:songs] = context_songs(hours_ago, end_date)
+    context[:movies] = context_videos(hours_ago, end_date)
+    context[:words] = context_word(hours_ago, end_date)
+    context
+  end
+
+  def context_logs(hours_ago, end_date)
+    logs = log_softwares.includes(:software).where('timestamp > ? AND timestamp < ? AND [Software].ignore <>1 ', hours_ago.hours.ago(end_date), end_date)
+    context_from_logs logs
+  end
+
+  def context_songs(hours_ago, end_date)
+    logs = log_songs.includes(:song, :software).where("started > ? AND started < ?", hours_ago.hours.ago(end_date), end_date)
+    context_from_logs logs
+
+  end
+
+  def context_videos(hours_ago, end_date)
+    logs = log_movies.includes({:movie => :software}, :software).where("started > ? AND started < ?", hours_ago.hours.ago(end_date), end_date)
+    context_from_logs(logs)
+
+  end
+
+  def context_from_logs(logs)
+    context = {}
+    logs.each do |log|
+      context[log.id_name] ||= []
+      context[log.id_name] << log.context
+    end
+    context.each_key { |name| context[name].delete nil }
+    context
+  end
+
+
+  def context_word (hours_ago, end_date)
+    logs = word_texts.includes(:word).where("[Text_Word].timestamp > ? AND [Text_Word].timestamp < ?", hours_ago.hours.ago(end_date), end_date)
+    texts = context_from_logs logs
+
+    logs = word_headings.includes(:word).where('[Heading_Word].timestamp > ? AND [Heading_Word].timestamp < ?', hours_ago.hours.ago(end_date), end_date)
+    headings = context_from_logs logs
+
+    headings.each_pair do |name, context|
+      if !texts[name]
+        texts[name] = context
+      else
+        texts[name].concat context
+      end
+    end
+
+    texts
+  end
+
   def calc_x_size(start_date, end_date)
-    ((end_date-start_date)/60 -50 ).ceil
+    ((end_date-start_date)/60 -50).ceil
   end
 
 
@@ -68,7 +127,8 @@ class User < ActiveRecord::Base
 
 
   def last_software(time)
-    LogSoftware.joins(:software).joins("JOIN (#{last_softwares_id(time).to_sql}) lss ON lss.stopa=timestamp").select("[Log_Software].id, name, pocet,softwareWindowName").order(:pocet).reverse_order
+    logs = LogSoftware.joins(:software).joins("JOIN (#{last_softwares_id(time).to_sql}) lss ON lss.stopa=timestamp").select("[Log_Software].id, name, pocet,softwareWindowName").order(:pocet).reverse_order
+    logs.each {|log| log.softwareWindowName = log["name"] if log.softwareWindowName.to_s == ""}
   end
 
   def update_ip(his_ip)

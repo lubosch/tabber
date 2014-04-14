@@ -13,13 +13,14 @@ Tabber::Application.routes.draw do
 
   end
 
-    resources :software do
+  resources :software do
     collection do
       get :last
     end
   end
 
   resources :user_sessions
+
 
 
   namespace :user do
@@ -31,7 +32,7 @@ Tabber::Application.routes.draw do
   root to: 'static_pages#home'
   get '/about-me' => 'static_pages#about_me', :as => 'about_me'
   get '/my-activity' => 'activities#show', :as => 'activity_show'
-
+  get '/my-context' => 'activities#context', :as => 'activity_context'
   get '/activities-logging' => 'static_pages#activity_logging', :as => 'activity_logging'
   get '/we-help' => 'static_pages#we_help', :as => 'we_help'
   get '/actual-state' => 'static_pages#actual_state', :as => 'actual_state'

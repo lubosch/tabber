@@ -2,6 +2,7 @@ class Video < ActiveRecord::Base
   self.table_name = 'Movie'
 
   belongs_to :software
+  has_many :log_movies
 
   attr_accessible :filename, :name, :timestamp, :times, :length, :software
 
