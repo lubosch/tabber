@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class LogSong < ActiveRecord::Base
   self.table_name = 'Log_Song'
 

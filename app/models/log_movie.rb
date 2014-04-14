@@ -1,4 +1,5 @@
-  class LogMovie < ActiveRecord::Base
+# encoding: UTF-8
+class LogMovie < ActiveRecord::Base
   self.table_name = 'Log_Movie'
 
   belongs_to :movie, :class_name => 'Video'

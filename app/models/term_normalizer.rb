@@ -1,3 +1,4 @@
+﻿# encoding: UTF-8
 # Used by Annota model for normalization of keywords, tag names, folder names, person names to terms
 class TermNormalizer
 
