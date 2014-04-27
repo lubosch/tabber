@@ -9,6 +9,7 @@ gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter', '~> 3.2.12'
 gem 'sqlite3', '1.3.5'
 gem 'ruby-odbc'
+gem 'chartkick'
 
 
 # Gems used only for assets and not required
