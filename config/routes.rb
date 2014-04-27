@@ -9,6 +9,8 @@ Tabber::Application.routes.draw do
     end
   end
 
+  resources :graphs
+
   resources :log_software do
 
   end
