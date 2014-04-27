@@ -1,0 +1,21 @@
+<%= javascript_include_tag "highcharts.js", "chartkick" %>
+<% @texts.each do |text| %>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to   text.split('/')[-1], graph_path(0, :file => text.split('/')[-1], :col => 1) %>
+<% end %>
+
+<p><b>Maxima:</b></p>
+<% @merania.each_with_index do |meranie, index| %>
+    <%= link_to index, graph_path(index, :file => @file, :col => 1) %>
+<% end %>
+<%= link_to 'all', graph_path(-1, :file => @file, :col => 1) %>
+
+<p><b>Priemery</b></p>
+<% @merania.each_with_index do |meranie, index| %>
+    <%= link_to index, graph_path(index, :file => @file, :col => 2) %>
+<% end %>
+
+<p>Priemer: <%= @merania[-2] %></p>
+
+<%= column_chart @merania[@id] %>
+
