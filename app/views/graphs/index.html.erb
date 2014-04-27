@@ -1,0 +1,3 @@
+<% @texts.each do |text| %>
+    <p><%= link_to text, graph_path(0,:file => text.split('/')[-1], :col =>1) %></p>
+<% end %>
