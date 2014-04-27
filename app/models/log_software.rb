@@ -17,7 +17,7 @@ class LogSoftware < ActiveRecord::Base
 
 
   def context
-    #lang = CLD.detect_language(softwareWindowName)[:code]
+    lang = CLD.detect_language(softwareWindowName)[:code]
     keywords = TermNormalizer.normalize(softwareWindowName.clone, lang)
     return nil if softwareWindowName.to_s == "" || keywords.count==0
     keywords_stemmed = StemNormalizer.normalize(keywords.clone, lang)

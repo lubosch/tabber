@@ -5,7 +5,7 @@ class WordHeading < ActiveRecord::Base
 
 
   def context
-    #lang = CLD.detect_language(self.text)[:code]
+    lang = CLD.detect_language(self.text)[:code]
     keywords = TermNormalizer.normalize(self.text, lang)
     return nil if keywords.count ==0
     keywords_stemmed = StemNormalizer.normalize(keywords.clone, lang)
