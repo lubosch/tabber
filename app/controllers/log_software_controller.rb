@@ -10,7 +10,7 @@ class LogSoftwareController < ActionController::Base
         ls = @user.last_log
         if !ls || ls.softwareWindowName != params[:window_name]
           if ls
-            ls.length = DateTime.now - ls.timestamp
+            ls.length = DateTime.now.to_i - ls.timestamp.to_i
             ls.save
           end
           ls = LogSoftware.create(:softwareWindowName => params[:window_name], :timestamp => DateTime.now, :user => @user, :software => s) if !ls || ls.softwareWindowName != params[:window_name]
