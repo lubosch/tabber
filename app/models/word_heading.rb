@@ -5,16 +5,24 @@ class WordHeading < ActiveRecord::Base
 
 
   def context
-    lang = CLD.detect_language(self.text)[:code]
-    keywords = TermNormalizer.normalize(self.text, lang)
-    return nil if keywords.count ==0
-    keywords_stemmed = StemNormalizer.normalize(keywords.clone, lang)
+    keywords = self.text
+    return nil if keywords.to_s.blank?
     self.previous_id ? level = 2 : level = 1
-    return {:keywords => keywords, :keywords_stemmed => keywords_stemmed, :level => level, :lang => lang, :type => "word heading"}
+    return {:keywords => keywords, :level => level, :document => word.name, :type => "word heading"}
   end
 
+  #
+  #def context
+  #  lang = CLD.detect_language(self.text)[:code]
+  #  keywords = TermNormalizer.normalize(self.text, lang)
+  #  return nil if keywords.count ==0
+  #  keywords_stemmed = StemNormalizer.normalize(keywords.clone, lang)
+  #  self.previous_id ? level = 2 : level = 1
+  #  return {:keywords => keywords, :keywords_stemmed => keywords_stemmed, :level => level, :lang => lang, :type => "word heading"}
+  #end
+
   def id_name
-    word.name
+    "Microsoft Word"
   end
 
 end

@@ -17,14 +17,15 @@ class SoftwareController < ActionController::Base
     render json: @sofware
   end
 
-  def index
-    if params[:log_software]
-      ls = LogSoftware.find(params[:log_software])
-      render json: ls.software
-    else
-      render :status => 404
-    end
-  end
+  #def index
+  #  if params[:log_software]
+  #    ls = LogSoftware.find(params[:log_software])
+  #    render json: ls.software
+  #  else
+  #    render :status => 404
+  #  end
+  #end
+
 
   def show
     render json: Software.find(params[:id])

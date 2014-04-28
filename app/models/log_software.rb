@@ -5,7 +5,7 @@ class LogSoftware < ActiveRecord::Base
   belongs_to :user
 
 
-  attr_accessible :softwareWindowName, :timestamp, :user, :software
+  attr_accessible :softwareWindowName, :timestamp, :user, :software, :length
 
 
   scope :timestamp_within, lambda { |time_ago| {:conditions => ['[Log_software].timestamp   > ?', time_ago]} }
@@ -17,13 +17,19 @@ class LogSoftware < ActiveRecord::Base
 
 
   def context
-    lang = CLD.detect_language(softwareWindowName)[:code]
-    keywords = TermNormalizer.normalize(softwareWindowName.clone, lang)
-    return nil if softwareWindowName.to_s == "" || keywords.count==0
-    keywords_stemmed = StemNormalizer.normalize(keywords.clone, lang)
-
-    return {:keywords => keywords, :keywords_stemmed => keywords_stemmed, :lang => lang, :type => "activity"}
+    keywords = softwareWindowName.clone
+    return nil if keywords.to_s.blank?
+    return {:keywords => keywords, :type => "activity"}
   end
+
+  #def context
+  #  lang = CLD.detect_language(softwareWindowName)[:code]
+  #  keywords = TermNormalizer.normalize(softwareWindowName.clone, lang)
+  #  return nil if softwareWindowName.to_s == "" || keywords.count==0
+  #  keywords_stemmed = StemNormalizer.normalize(keywords.clone, lang)
+  #
+  #  return {:keywords => keywords, :keywords_stemmed => keywords_stemmed, :lang => lang, :type => "activity"}
+  #end
 
   def id_name
     software.name

@@ -47,7 +47,15 @@ class User < ActiveRecord::Base
   end
 
   def context_logs(hours_ago, end_date)
-    logs = log_softwares.includes(:software).where('timestamp > ? AND timestamp < ? AND [Software].ignore <>1 ', hours_ago.hours.ago(end_date), end_date)
+    logs = LogSoftware.includes(:software).where('timestamp > ? AND timestamp < ? AND user_id = ? AND [Software].ignore <>1 ', hours_ago.hours.ago(end_date), end_date, self.id).order(:timestamp)
+
+    (1...logs.size).each do |i|
+      if !logs[i-1].length
+        logs[i-1].length = logs[i].timestamp - logs[i-1].timestamp
+        logs[i-1].save
+      end
+    end
+
     context_from_logs logs
   end
 
@@ -128,7 +136,7 @@ class User < ActiveRecord::Base
 
   def last_software(time)
     logs = LogSoftware.joins(:software).joins("JOIN (#{last_softwares_id(time).to_sql}) lss ON lss.stopa=timestamp").select("[Log_Software].id, name, pocet,softwareWindowName").order(:pocet).reverse_order
-    logs.each {|log| log.softwareWindowName = log["name"] if log.softwareWindowName.to_s == ""}
+    logs.each { |log| log.softwareWindowName = log["name"] if log.softwareWindowName.to_s == "" }
   end
 
   def update_ip(his_ip)
