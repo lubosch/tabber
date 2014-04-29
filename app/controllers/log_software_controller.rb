@@ -9,11 +9,13 @@ class LogSoftwareController < ActionController::Base
         s = Software.find_or_create_by_process(:process => params[:process_name], :filepath => params[:filepath], :name => params[:description], :ignore => 0)
         ls = @user.last_log
         if !ls || ls.softwareWindowName != params[:window_name]
-          if ls
-            ls.length = DateTime.now.to_i - ls.timestamp.to_i
-            ls.save
+          LogSoftware.transaction do
+            if ls
+              ls.length = DateTime.now.to_i - ls.timestamp.to_i
+              ls.save
+            end
+            ls = LogSoftware.create(:softwareWindowName => params[:window_name], :timestamp => DateTime.now, :user => @user, :software => s) if !ls || ls.softwareWindowName != params[:window_name]
           end
-          ls = LogSoftware.create(:softwareWindowName => params[:window_name], :timestamp => DateTime.now, :user => @user, :software => s) if !ls || ls.softwareWindowName != params[:window_name]
         end
       end
       render json: ls
