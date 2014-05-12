@@ -1,4 +1,4 @@
-class LogSoftwareController < ActionController::Base
+class LogSoftwareController < ApplicationController
   include ApplicationHelper
 
   def create
@@ -31,7 +31,7 @@ class LogSoftwareController < ActionController::Base
     if ls
       render json: ls.software
     else
-      render :status => 404
+      render :status => 404, :nothing => true
     end
 
   end
@@ -44,7 +44,7 @@ class LogSoftwareController < ActionController::Base
       ls.each { |q| res[q.id] = q.software.name }
       render json: res
     else
-      render :status => 404
+      render :status => 404, :nothing => true
     end
 
   end

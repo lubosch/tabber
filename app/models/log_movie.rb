@@ -8,9 +8,9 @@ class LogMovie < ActiveRecord::Base
 
   attr_accessible :movie, :software, :user, :started
 
-  def context
-    keywords = movie.name.scan(/[\p{L}\d]+/)
-    {:keywords => keywords, :keywords_stemmed => [], :lang => "exact", :type => "movie"}
+  def keywords
+    words = movie.name.scan(/[\p{L}\d]+/)
+    {:keywords => words, :keywords_stemmed => [], :lang => "exact", :type => "movie"}
   end
 
   def id_name

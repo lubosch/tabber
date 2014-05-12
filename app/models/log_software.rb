@@ -16,10 +16,10 @@ class LogSoftware < ActiveRecord::Base
   end
 
 
-  def context
-    keywords = softwareWindowName.clone
-    return nil if keywords.to_s.blank?
-    return {:keywords => keywords, :type => "activity"}
+  def keywords
+    words = softwareWindowName.clone
+    return nil if words.to_s.blank?
+    return {:keywords => words, :type => "StartedActive", :timestamp => timestamp, :length => length}
   end
 
   #def context

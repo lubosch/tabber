@@ -8,12 +8,12 @@ class LogSong < ActiveRecord::Base
 
   attr_accessible :song, :software, :user, :started
 
-  def context
+  def keywords
 
-    keywords = song.name.to_s + " " + song.artist.to_s + " " + song.genre.to_s
-    keywords = keywords.scan(/[\p{L}\d]+/)
+    words = song.name.to_s + " " + song.artist.to_s + " " + song.genre.to_s
+    words = words.scan(/[\p{L}\d]+/)
 
-    {:keywords => keywords, :keywords_stemmed => [], :lang => "exact", :type => "movie"}
+    {:keywords => words, :keywords_stemmed => [], :lang => "exact", :type => "song"}
   end
 
   def id_name

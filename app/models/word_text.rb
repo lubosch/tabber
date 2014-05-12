@@ -3,10 +3,10 @@ class WordText < ActiveRecord::Base
 
   belongs_to :word
 
-  def context
-    keywords = self.text
-    return nil if keywords.to_s.blank?
-    return {:keywords => keywords, :document => word.name, :type => "word text"}
+  def keywords
+    words = self.text
+    return nil if words.to_s.blank?
+    return {:keywords => words, :document => word.name, :type => "word text"}
   end
 
   #def context

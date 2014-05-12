@@ -42,7 +42,7 @@ class ActivitiesController < ApplicationController
     user = User.find_by_annota_id(params[:annota_id]) if params[:annota_id]
 
     if user && params[:hours_ago] && params[:end_date]
-      context = user.context(params[:hours_ago].to_i, Time.parse(params[:end_date]))
+      context = user.context(params[:hours_ago].to_f, Time.parse(params[:end_date]))
       render json: context
       return
     end

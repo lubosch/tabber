@@ -4,11 +4,11 @@ class WordHeading < ActiveRecord::Base
   belongs_to :word
 
 
-  def context
-    keywords = self.text
-    return nil if keywords.to_s.blank?
+  def keywords
+    words = self.text
+    return nil if words.to_s.blank?
     self.previous_id ? level = 2 : level = 1
-    return {:keywords => keywords, :level => level, :document => word.name, :type => "word heading"}
+    return {:keywords => words, :level => level, :document => word.name, :type => "word heading"}
   end
 
   #

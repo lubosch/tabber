@@ -39,14 +39,16 @@ class User < ActiveRecord::Base
 
   def context(hours_ago, end_date)
     context = {}
-    context[:activities] = context_logs(hours_ago, end_date)
-    context[:songs] = context_songs(hours_ago, end_date)
-    context[:movies] = context_videos(hours_ago, end_date)
-    context[:words] = context_word(hours_ago, end_date)
+    context = context_logs(hours_ago, end_date, context)
+    context = context_songs(hours_ago, end_date, context)
+    context = context_videos(hours_ago, end_date, context)
+    context = context_word(hours_ago, end_date, context)
+
+
     context
   end
 
-  def context_logs(hours_ago, end_date)
+  def context_logs(hours_ago, end_date, context)
     logs = LogSoftware.includes(:software).where('timestamp > ? AND timestamp < ? AND user_id = ? AND [Software].ignore <>1 ', hours_ago.hours.ago(end_date), end_date, self.id).order(:timestamp)
 
     (1...logs.size).each do |i|
@@ -56,48 +58,42 @@ class User < ActiveRecord::Base
       end
     end
 
-    context_from_logs logs
+    context_from_logs logs, context
   end
 
-  def context_songs(hours_ago, end_date)
+  def context_songs(hours_ago, end_date, context)
     logs = log_songs.includes(:song, :software).where("started > ? AND started < ?", hours_ago.hours.ago(end_date), end_date)
-    context_from_logs logs
-
+    context_from_logs logs, context
   end
 
-  def context_videos(hours_ago, end_date)
+  def context_videos(hours_ago, end_date, context)
     logs = log_movies.includes({:movie => :software}, :software).where("started > ? AND started < ?", hours_ago.hours.ago(end_date), end_date)
-    context_from_logs(logs)
+    context_from_logs(logs, context)
 
   end
 
-  def context_from_logs(logs)
-    context = {}
+  def context_from_logs(logs, context)
     logs.each do |log|
-      context[log.id_name] ||= []
-      context[log.id_name] << log.context
+      context[log.id_name] ||= {}
+      context[log.id_name][:keywords] ||= [{:keywords => log.id_name, :type => "AppName"}]
+      context[log.id_name][:keywords] << log.keywords
     end
     context.each_key { |name| context[name].delete nil }
     context
   end
 
 
-  def context_word (hours_ago, end_date)
+  def context_word (hours_ago, end_date, context)
     logs = word_texts.includes(:word).where("[Text_Word].timestamp > ? AND [Text_Word].timestamp < ?", hours_ago.hours.ago(end_date), end_date)
-    texts = context_from_logs logs
+    texts = context_from_logs logs, context
 
     logs = word_headings.includes(:word).where('[Heading_Word].timestamp > ? AND [Heading_Word].timestamp < ?', hours_ago.hours.ago(end_date), end_date)
-    headings = context_from_logs logs
+    headings = context_from_logs logs, context
 
-    headings.each_pair do |name, context|
-      if !texts[name]
-        texts[name] = context
-      else
-        texts[name].concat context
-      end
-    end
+    #binding.pry
 
-    texts
+    context
+    #texts
   end
 
   def calc_x_size(start_date, end_date)

@@ -26,6 +26,7 @@ end
 
 gem 'rspec-rails', '~> 2.6', :group => [:test, :development]
 gem 'jquery-rails'
+gem 'railroady'
 gem 'jquery-ui-rails'
 gem 'authlogic'
 gem 'thin'
