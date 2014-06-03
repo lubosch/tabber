@@ -6,7 +6,7 @@ class StatReader
     (1...merania.count).each do |meranie|
       merania_fin << [meranie, merania[meranie][-1][0]]
     end
-    binding.pry
+    #binding.pry
 
     {-1 => merania_fin}
   end

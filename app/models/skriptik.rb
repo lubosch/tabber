@@ -8,7 +8,7 @@ class Skriptik
           ls.save
         end
       rescue Exception => ex
-        binding.pry
+        #binding.pry
       end
     end
   end
