@@ -22,4 +22,10 @@ class WordText < ActiveRecord::Base
     "Microsoft Word"
   end
 
+
+  def soft_id
+    23
+  end
+
+
 end

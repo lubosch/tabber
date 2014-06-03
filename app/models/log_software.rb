@@ -35,4 +35,9 @@ class LogSoftware < ActiveRecord::Base
     software.name
   end
 
+  def soft_id
+    software.id
+  end
+
+
 end

@@ -77,19 +77,23 @@ class User < ActiveRecord::Base
       context[log.id_name] ||= {}
       context[log.id_name][:keywords] ||= [{:keywords => log.id_name, :type => "AppName"}]
       context[log.id_name][:keywords] << log.keywords
+      context[log.id_name][:type] ||= "Software"
+      context[log.id_name][:id] ||= log.soft_id
+
+
     end
     context.each_key { |name| context[name].delete nil }
     context
   end
 
 
+
   def context_word (hours_ago, end_date, context)
     logs = word_texts.includes(:word).where("[Text_Word].timestamp > ? AND [Text_Word].timestamp < ?", hours_ago.hours.ago(end_date), end_date)
-    texts = context_from_logs logs, context
+    context_from_logs logs, context
 
     logs = word_headings.includes(:word).where('[Heading_Word].timestamp > ? AND [Heading_Word].timestamp < ?', hours_ago.hours.ago(end_date), end_date)
-    headings = context_from_logs logs, context
-
+    context_from_logs logs, context
     #binding.pry
 
     context

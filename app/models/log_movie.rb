@@ -16,5 +16,8 @@ class LogMovie < ActiveRecord::Base
   def id_name
     software.name
   end
+  def soft_id
+    software.id
+  end
 
 end

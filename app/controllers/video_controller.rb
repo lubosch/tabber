@@ -21,7 +21,7 @@ class VideoController < ApplicationController
         length = metadata['duration']
         category = metadata['category']
         title = metadata['title']
-        s = Software.find_or_create_by_filepath_and_name_and_process('www.youtube.com', 'YouTube', '-1')
+        s = Software.find_or_create_by_filepath_and_name_and_process('www.youtube.com', 'youtube.com', '-1')
 
         if category == 'Music'
           artist, name = clear_name(title)
